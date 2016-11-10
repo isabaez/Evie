@@ -1,1 +1,0 @@
-module.exports = "mongodb://isabaez:474601ubub@ds017195.mlab.com:17195/evie"

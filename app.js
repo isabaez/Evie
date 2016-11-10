@@ -30,8 +30,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-var connect = require('./models/connect.js');
-mongoose.connect(connect);
+mongoose.connect(process.env.MONGODB_URI);
 
 app.use(session({
     secret: "secret",
@@ -57,12 +56,10 @@ passport.use(new LocalStrategy(function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
       // if there's an error, finish trying to authenticate (auth failed)
       if (err) {
-        console.error(err);
         return done(err);
       }
       // if no user present, auth failed
       if (!user) {
-        console.log(user);
         return done(null, false, { message: 'Incorrect username.' });
       }
       // if passwords do not match, auth failed

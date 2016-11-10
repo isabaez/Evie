@@ -6,10 +6,7 @@ var List = require('../models/models').List;
 var Event = require('../models/models').Event;
 var EventMaster = require('../models/models').EventMaster;
 
-var accountSid = "AC8d70bb3dc103fb516b8af482b6052bc6";
-var authToken = "52d118e081573a74887c0fff2156da17";
-var fromPhone = "2678840117";
-var twilio = require('twilio')(accountSid, authToken);
+var twilio = require('twilio')(process.env.ACCOUNT_SID, process.env.AUTH_TOKEN);
 
 function randomCode() {
   var min = 1000;
@@ -38,7 +35,7 @@ router.get('/listCheck', function(req, res, next) {
 									group.users.forEach(function(user) {
 										twilio.sendMessage({
 											to: user.phoneNum,
-											from: fromPhone,
+											from: process.env.FROM_PHONE,
 											body: "Voting on " + list.name + " has closed, time limit has been reached! View your results now!"
 										}, function(err, data) {
 											console.log(err);
@@ -70,7 +67,7 @@ router.get('/verify/:id', function(req, res, next) {
 			});
 			twilio.sendMessage({
 	        to: "+1" + user.phoneNum,
-	        from: fromPhone,
+	        from: process.env.FROM_PHONE,
 	        body: "Your 4-digit Code is: " + user.registrationCode
 	      	}, function(err, resp) {
 	        	if (err) {
@@ -443,7 +440,7 @@ router.get('/message/:lid', function(req, res, next) {
 					group.users.forEach(function(user) {
 						twilio.sendMessage({
 							to: user.phoneNum,
-							from: fromPhone,
+							from: process.env.FROM_PHONE,
 							body: "Voting on " + list.name + " has completed! View your results now!"
 						})
 					})
@@ -474,7 +471,7 @@ router.get('/confirm/:eid', function(req, res, next) {
 						else {
 							twilio.sendMessage({
 								to: user.phoneNum,
-								from: fromPhone,
+								from: process.env.FROM_PHONE,
 								body: "Your event " + event.event.title + " has been confirmed for " + date + " at " + event.event.location + " at " + event.event.startTime
 							})
 						}
