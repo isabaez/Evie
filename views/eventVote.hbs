@@ -1,0 +1,43 @@
+<div class="logoCorner marginal">
+	<img src="/evie.png" class="logo">
+</div>
+<div class="addHeight">
+	<div class="divIn left">
+		<a href="/groups/{{gid}}" id="toGrpSingle" class="btn btn-color"> Go back to Group Page </a>
+	</div>
+	<div class="marBot divIn right">
+		<a href="/logout"  id="logout" class ="btn btn-color">Log Out</a>
+	</div>
+</div>
+<br>
+
+<div>
+	<img src="{{imageUri}}" class='fit marBot'>
+</div>
+<div class='groupBack lefty marginalSmall certainWidth'>
+		<div class='border marginalSmall'>
+	    <p class='break'><b>{{title}}</b></p>
+	  </div>
+		<div class='border marginalSmall'>
+	    <p class='break'>{{description}}</p>
+	  </div>
+	  <div class='border marginalSmall'>
+	    <p class='break '>{{location}}</p>
+	  </div>
+	  <div class='border marginalSmall'>
+	    <p class='break'>{{date}}</p>
+	  </div>
+	  <div class='border marginalSmall'>
+	    <p class='break'>{{startTime}}</p>
+	  </div>
+	  <div class="border marginalSmall">
+	    <p class='break'>{{price}}</p>
+	  </div>
+</div>
+
+<center>
+<form method="POST">
+	<button type='submit' id="no" name="choice" class='btn btn-color marginal marRightNo' value="No">No, not this.</button>
+	<button type="submit" id="yes" name="choice" class='btn btn-color marginal marLeftYes' value="Yes">Yes, let's go!</button>
+</form>
+</center>

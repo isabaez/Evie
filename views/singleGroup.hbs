@@ -1,0 +1,169 @@
+<div class="logoCorner marginal">
+	<img src="/evie.png" class="logo">
+</div>
+<div class="addHeight">
+	<div class="divIn left">
+		<a href="/groups" id="toGrp" class="btn btn-color">Back to Groups</a>
+	</div>
+	<div class="marBot divIn right">
+		<a href="/logout"  id="logout" class ="btn btn-color">Log Out</a>
+	</div>
+</div>
+<br>
+<div id="centerFlex" class="marginal">
+	<button id="groupButton" class="btn btn-color marginalSmall" data-toggle="collapse" data-target="#members">Members</button>
+	<div id="members" class="collapse">
+		<center>
+			{{#each users}}
+			<div class='border'>
+				<p class='break'>{{username}}</p>
+			</div>
+			{{/each}}
+		</center>
+	</div>
+	<button id="newOne" class="btn btn-color marginalSmall" data-toggle="collapse" data-target="#addMem">Add Member</button>
+	<div id="addMem" class="collapse">
+		<center>
+			<form method="POST">
+				<div class="form-group">
+					<input type="text" id="newUser" name="username" class="form-control" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<button id="addSubMem" type="submit" class="btn btn-color">Add</button>
+				</div>
+			</form>
+		</center>
+	</div>
+</div>
+
+<div class="groupBack marginalSmall">
+	<center>
+		<p class='title break'>{{name}}</p>
+	</center>
+</div>
+<div class="marginal groupBack grpDes certainWidth">
+	<p class='break'>{{description}}</p>
+</div>
+
+<center>
+	<div class='bont marginalSmall'>
+		Live Votes
+	</div>
+
+	<div>
+		{{#each lists}}
+		<div class='groupBack marginalSmall certainWidth'>
+			<a href='/eventLoad/{{_id}}'>
+				<div>  
+					<p class='break'><b>Vote Name:</b> {{name}}</p>
+				</div>
+				<div>
+					<p class='break'><b>Vote Description:</b> {{description}}</p>
+				</div>
+			</a>
+		</div>
+		{{/each}}
+	</div>
+</center>
+
+<div id="centerFlex">
+	<div class="dropdown middleman">
+		<button id="voteNow" class="btn btn-color marginal" data-toggle="collapse" data-target="#newVote">Start New Vote</button>
+		<div id="newVote" class="collapse">
+			<form method="POST">
+				<div class="form-group">
+					<input type="text" name="name" id="name" class="form-control" placeholder="Event Name">
+				</div>
+				<div class="form-group">
+					<textarea name="description" placeholder="Description" rows="2" cols="19"></textarea>
+				</div>
+				<div class="form-group">
+					<input type="text" name="searchLocation" class="form-control" placeholder="Search Location">
+				</div>
+				<div class="form-group">
+				<label for="from">From Date</label>
+					<input type="date" id="from" name="fromDate" class="form-control">
+				</div>
+				<div class="form-group">
+				<label for="male">To Date</label>
+					<input type="date" id="to" name="toDate" class="form-control">
+				</div>
+				<div class="form-group">
+					<label for="limit">Open Until</label>
+					<input type="datetime-local" id="limit" name="timeLimit" class="form-control">
+				</div>
+				<div class="funkyradio">
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox1" value="music">
+						<label for="cBox1">Music</label>
+					</div>
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox2" value="food">
+						<label for="cBox2">Food</label>
+					</div>
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox3" value="outdoor">
+						<label for="cBox3">Outdoors</label>
+					</div>
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox4" value="sports">
+						<label for="cBox4">Sports</label>
+					</div>
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox5" value="historic">
+						<label for="cBox5">Historic</label>
+					</div>
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox6" value="nightlife">
+						<label for="cBox6">Nightlife</label>
+					</div>
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox7" value="art">
+						<label for="cBox7">Art</label>
+					</div>
+					<div class="itsAlwaysGreen">
+						<input type="checkbox" name="select" id="cBox8" value="festivals">
+						<label for="cBox8">Festivals</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<button id ="createVoteButton" type="submit" class="btn btn-color">Start</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<center>
+	<div class='bont marginalSmall'>
+		Events Requiring Action
+	</div>
+
+	<div>
+		{{#each closed}}
+		<div class='groupBack marginalSmall certainWidth'>
+			<a href='/results/{{_id}}'>
+				<div>  
+					<p class='break'><b>Vote Name:</b> {{name}}</p>
+				</div>
+				<div>
+					<p class='break'><b>Vote Description:</b> {{description}}</p>
+				</div>
+			</a>
+		</div>
+		{{/each}}
+	</div>
+</center>
+
+	<script>
+		$( "#newOne" ).click(function() {
+			setTimeout(function() {
+				$('#newUser').focus();
+			});
+		});
+		$('#voteNow').click(function() {
+			setTimeout(function() {
+				$('#name').focus();
+			});
+		});
+	</script>
