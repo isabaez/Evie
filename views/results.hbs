@@ -1,27 +1,18 @@
-<div class="logoCorner marginal">
+<header>
 	<img src="/evie.png" class="logo">
-</div>
-
-<div class="addHeight">
-	<div class="divIn left">
-		<a href="/groups" id="toGrp" class="btn btn-color">Back to Groups</a>
+	<a href="/logout" class ="btn btn-header btn-color">Log Out</a>
+	<a href="/groups" class="btn btn-header btn-color">Back to all groups</a>
+</header>
+<div class="wrapper">
+	<div>
+		<a href="/actNow/{{_id}}" class='btn btn-color'>Take action now</a>
 	</div>
-	<div class="marBot divIn right">
-		<a href="/logout" id="logout" class ="btn btn-color">Log Out</a>
-	</div>
-</div>
-
-	<a href = "/actNow/{{_id}}" style="display: {{display}}" class='btn btn-color pads grpDes marginal'>Take action now</a>
-
-<center>
-	<div class='bont marginalSmall'>
+	<div>
 		Results
 	</div>
 	{{#each results}}
-	<div class='groupBack marginalSmall certainWidth'>
-			<div>
-				<p class='break'> <b>{{event.title}}:</b> {{tally.length}}</p>
-			</div>
+	<div style="float:left">
+		<h3>{{event.title}}: {{tally.length}}</h3>
 	</div>
 	{{/each}}
-</center>
+</div>

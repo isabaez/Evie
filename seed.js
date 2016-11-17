@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var EventMaster = require('./models/models').EventMaster;
-mongoose.connect(require('./models/connect'));
+mongoose.connect(process.env.MONGODB_URI);
 
 var events = require('./events.json');
 

@@ -1,38 +1,24 @@
-<div class="logoCorner marginal">
+<header>
 	<img src="/evie.png" class="logo">
-</div>
-<div class="addHeight">
-	<div class="divIn left">
-		<a href="/groups" id="toGrp" class="btn btn-color">Back to Groups</a>
-	</div>
-	<div class="marBot divIn right">
-		<a href="/logout"  id="logout" class ="btn btn-color">Log Out</a>
-	</div>
-</div>
-<br>
+	<a href="/logout" class ="btn btn-header btn-color">Log Out</a>
+	<a href="/groups" class="btn btn-header btn-color">Back to all groups</a>
+</header>
 
-<center>
-	<div class='bont marginalSmall'>
-		Confirm one of the following:
-	</div>
+<div class="wrapper">
+	<h1>Confirm one of the following:</h1>
+	<div style="float: left">
 	{{#each winners}}
-		<div class='groupBack marginalSmall certainWidth'>
 		<div>
-			<b>{{event.title}}</b> <a href='/confirm/{{_id}}'>Confirm</a><br>
-		</div>
+			<h3>{{event.title}} <a href='/confirm/{{_id}}'>Confirm</a></h3>
 		</div>
 	{{/each}}
-</center>
-<br>
-<center>
-	<div class='bont marginalSmall '>
-		Results
 	</div>
+	<h1>Results</h1>
+	<div style="float: left">
 	{{#each results}}
-	<div class='groupBack marginalSmall certainWidth'>
-			<div>
-				<p class='break'> <b>{{event.title}}:</b> {{tally.length}}</p>
-			</div>
-	</div>
+		<div>
+			<h3>{{event.title}}: {{tally.length}}</h3>
+		</div>
 	{{/each}}
-</center>
+	</div>
+</div>

@@ -68,11 +68,13 @@ router.get('/verify/:id', function(req, res, next) {
 			twilio.sendMessage({
 	        to: "+1" + user.phoneNum,
 	        from: process.env.FROM_PHONE,
-	        body: "Your 4-digit Code is: " + user.registrationCode
+	        body: "Your 4-digit verification code is: " + user.registrationCode
 	      	}, function(err, resp) {
 	        	if (err) {
 	          		console.log(err);
 	          		return;
+	        	} else {
+	        		console.log(resp);
 	        	}
 	      	})
 			res.render('verify', {
@@ -85,13 +87,20 @@ router.get('/verify/:id', function(req, res, next) {
 router.post('/verify/:id', function(req, res, next) {
 	User.findById(req.params.id, function(err, user) {
 		if (user.registrationCode === req.body.code) {
-			var update = {
-				verified: true
-			}
+			var update = { verified: true };
 			User.findByIdAndUpdate(req.params.id, update, function(err, user) {
-				if (err) console.log(err)
+				if (err) { console.log(err) }
 				else {
-					res.redirect('/login');
+					req.login(user, function(err, resp) {
+						if (err) {
+							console.log(err);
+							res.render('verify', {
+								error: "There was an error logging you in. Please try again."
+							})
+						} else {
+							res.redirect('/')
+						}
+					});
 				}
 			})
 		} else {
@@ -103,7 +112,7 @@ router.post('/verify/:id', function(req, res, next) {
 })
 
 
-/* GET home page. */
+/* Authentication Wall */
 router.use(function(req, res, next) {
 	if (!req.user) {
 		res.redirect('/login')
@@ -223,10 +232,9 @@ router.post('/groups/:gid', function(req, res, next) {
 				console.log(err)
 			} else {
 				var arr = req.body.select;
-				if(typeof arr === 'string'){
+				if (typeof arr === 'string') {
 					arr = [arr];
-				}
-				if (arr.indexOf('nightlife') !== -1) {
+				} if (arr.indexOf('nightlife') !== -1) {
 					EventMaster.find({eventType: 'nightlife'}, function(err, events) {
 						events.forEach(function(event) {
 							var e = new Event({
@@ -251,8 +259,7 @@ router.post('/groups/:gid', function(req, res, next) {
 						})
 					})
 					arr.splice(arr.indexOf('nightlife'), 1);
-				}
-				if (arr.indexOf('historic') !== -1) {
+				} if (arr.indexOf('historic') !== -1) {
 					EventMaster.find({eventType: 'historic'}, function(err, events) {
 						console.log(events);
 						events.forEach(function(event) {
@@ -278,8 +285,7 @@ router.post('/groups/:gid', function(req, res, next) {
 						})
 					})
 					arr.splice(arr.indexOf('historic'), 1);
-				}
-				EventMaster.find({ date: { $gt: req.body.fromDate, $lt: req.body.toDate }, eventType: { $in: arr }}, function(err, events) {
+				} EventMaster.find({ date: { $gt: req.body.fromDate, $lt: req.body.toDate }, eventType: { $in: arr }}, function(err, events) {
 					events.forEach(function(event) {
 						var e = new Event({
 							event: event._id,
@@ -480,6 +486,16 @@ router.get('/confirm/:eid', function(req, res, next) {
 			}
 			res.redirect('/groups/' + list.parentGroup);
 		})
+	})
+})
+
+router.get('/deleteGroup/:gid', function(req, res, next) {
+	Groups.findById(req.params.gid).remove().exec(function(err, group) {
+		if (err) {
+			console.log(err);
+		} else {
+			res.redirect('/groups');
+		}
 	})
 })
 

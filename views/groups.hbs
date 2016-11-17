@@ -1,50 +1,48 @@
-<div class="logoCorner marginal">
+<header>
+  <a class="btn btn-header btn-color" href="/logout">Log Out</a>
   <img src="/evie.png" class="logo">
-</div>
-<div class="addHeight">
-  <div class="marBot right">
-    <a href="/logout"  id="logout" class ="btn btn-color">Log Out</a>
-  </div>
-</div>
-<br>
-<center>
-  <div class='bont marginal'>
-    Groups
-  </div>
-  <div>
-    {{#each groups}}
-    <div class='groupBack lefty marginalSmall certainWidth'>
-      <a href="/groups/{{_id}}">
-        <div>
-          <p class='break'><b>Name:</b> {{name}}</p>
-        </div>
-        <div>
-          <p class='break'><b>Description:</b> {{description}}</p>
-        </div>
-      </a>
-    </div>
-    {{/each}}
-  </div>
-</center>
+</header>
 
-<div id="centerFlex" class="marginal middleman marTop">
-  <button id="newGrp" class="btn btn-color marginalSmall" data-toggle="collapse" data-target="#addGrp">Create Group</button>
-  <div id="addGrp" class="collapse">
-    <form method="POST"">
-      <div class="form-group">
-        <input type="text" id="newGroup" name="name" class="form-control" placeholder="Group Name">
-      </div>
-      <div class="form-group">
-        <textarea name="description" placeholder="Group Description" rows="3" cols="19"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" id="createGroupButton" class="btn btn-color">Add</button>
-      </div>
-    </form>
+<div class="wrapper">
+  <div>
+    {{#if groups}}
+      {{#each groups}}
+        <div class="container">
+          <div style="float: right">
+            <a href="/deleteGroup/{{_id}}"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+          </div>
+          <a href="/groups/{{_id}}">
+            <div style="display:inline-block;">
+              <h1>{{name}}</h1>
+              <h2>{{description}}</h2>
+            </div>
+          </a>
+        </div>
+      {{/each}}
+    {{else}}
+      <div>Create a group to get started!</div>
+    {{/if}}
   </div>
+  <button id="createGroup" class="btn btn-color" data-toggle="collapse" data-target="#createGroupForm">Create New Group</button>
+    <form method="POST" id="createGroupForm" style="display:none;">
+      <div class="form-group">
+        <input class="form-control" id="newGroup" name="name" placeholder="Group Name">
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" name="description" placeholder="Description"></textarea>
+      </div>
+      <button type="submit" id="createGroupButton" class="btn btn-color">Add</button>
+    </form>
 </div>
+
 <script>
-  $( "#newGrp" ).click(function() {
-    $('#newGroup').focus();
+  $( "#createGroup" ).click(function() {
+    $("#createGroupForm").toggle();
   });
+
+  $(".container>div>a>.fa").click(function(e) {
+    if(!confirm("This group will be deleted permanently. Are you sure you wish to continue?")) {
+      e.preventDefault();
+    }
+  }) 
 </script>

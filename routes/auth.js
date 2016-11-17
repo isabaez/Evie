@@ -2,11 +2,9 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/models').User;
 
-function randomCode() {
-  var min = 1000;
-  var max = 9999;
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+function validateReq(userData) {
+  return (userData.password === userData.passwordRepeat);
+};
 
 module.exports = function(passport) {
 
@@ -20,11 +18,6 @@ module.exports = function(passport) {
 	    }
   	});
 
-	// Password Validation
-	var validateReq = function(userData) {
-		return (userData.password === userData.passwordRepeat);
-	};
-
 	//POST registration page
   router.post('/register', function(req, res) {
     if (!validateReq(req.body)) {
@@ -36,7 +29,6 @@ module.exports = function(passport) {
       username: req.body.username,
       password: req.body.password,
       phoneNum: req.body.phoneNum,
-      registrationCode: randomCode().toString(),
       verified: false
     });
     u.save(function(err, user) {
