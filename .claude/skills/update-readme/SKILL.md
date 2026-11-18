@@ -88,6 +88,6 @@ propose adding it.
 ## This project
 
 <!-- Filled in by /init-project. README size and whether audits fan out; which existing sections map to the four required parts; sections tied to code (e.g. a setup section that must match service files); numbers or counts that must stay current. Facts only; nothing sensitive in a public repo. -->
-- README.md was empty (0 bytes) before the setup, so no existing sections map to the four required parts.
+- README.md is about 4.5 KB (no fan-out). Written at setup: intro (top paragraph), `## Getting it running locally`, `## Directory layout`, `## Working with Claude Code`.
 - Local setup needs MongoDB and Twilio credentials (`MONGODB_URI`, `ACCOUNT_SID`, `AUTH_TOKEN`, `FROM_PHONE`); the setup section must match the env vars read in `app.js`, `routes/index.js` and `seed.js`.
 - `events.json` holds the seeded event list; keep any count in the README in step with it.
