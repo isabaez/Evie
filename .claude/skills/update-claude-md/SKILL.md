@@ -128,3 +128,7 @@ propose adding it.
 - CLAUDE.md lives at the repo root.
 - Stack: Node.js + Express 4, Handlebars views (`hbs`), Passport local auth, Mongoose 4 (MongoDB), Twilio SMS. CommonJS, no build step, no tests.
 - The app is slated for a rebuild as a static demo; describe what the code does now, not the plan.
+- Official docs used (checked 2026-11-17): expressjs.com security and performance best practices, handlebarsjs.com expressions guide, W3C WAI forms tutorials (labels, notifications), WCAG 2.2 quick reference.
+- Rules files: `express.md` (app.js, bin/www, routes/), `handlebars.md` (views/), `accessibility.md` (views/, stylesheets). `git-workflow.md` is installed by /init-project.
+- Line budget: CLAUDE.md is about 170 lines at setup; keep it under about 200.
+- No convention exceptions approved.
