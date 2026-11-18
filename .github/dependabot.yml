@@ -1,0 +1,32 @@
+# init-project-file v1 — managed by /init-project; re-sync regenerates it from the project's package files
+# Version updates: weekly PRs into develop, minor and patch bundled per ecosystem, and no release newer than
+# 7 days (cooldown), so a malicious publish is usually pulled before it reaches this repo. Security updates
+# skip the cooldown and the schedule. The dev reviews and merges every Dependabot PR.
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directories:
+      - "/"
+    target-branch: "develop"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    groups:
+      npm-minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+  - package-ecosystem: "github-actions"
+    directories:
+      - "/"
+    target-branch: "develop"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    cooldown:
+      default-days: 7
+    groups:
+      github-actions-minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
