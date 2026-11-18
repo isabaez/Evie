@@ -1,0 +1,2 @@
+# Keep both sides' changelog bullets when branches merge
+CHANGELOG.md merge=union
